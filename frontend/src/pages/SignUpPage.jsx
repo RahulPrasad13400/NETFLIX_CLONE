@@ -1,16 +1,23 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useAuthStore } from '../store/authUser'
 
 export default function SignUpPage() {
+    const navigate = useNavigate()
 
-    const [email, setEmail] = useState("")
+    // To get the value of email from the url 
+    const { searchParams } = new URL(document.location)
+    const emailValue = searchParams.get('email')
+
+    const [email, setEmail] = useState(emailValue || "")
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
 
+    const {signup} = useAuthStore()
+
     function handleSignUp(e){
         e.preventDefault()
-        if(!email || !username || !password) return
-        console.log(email, username, password)
+        signup({email, username, password})
     }
 
   return (

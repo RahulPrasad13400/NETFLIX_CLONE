@@ -21,7 +21,7 @@ app.use('/api/v1/tv', protectRoute, tvRoutes)
 app.use('/api/v1/search', protectRoute, searchRoutes)
 
 app.listen(PORT,()=>{
-    console.log("server running..")
+    console.log("server running..", PORT)
     connectDB()
 })
 
