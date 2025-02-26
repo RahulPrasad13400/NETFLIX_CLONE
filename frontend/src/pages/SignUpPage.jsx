@@ -72,7 +72,7 @@ export default function SignUpPage() {
             <div className='text-center text-gray-300 space-x-2'>
                 Already a member?{" "}
                 <Link to={'/login'} className='text-red-500 hover:underline'>
-                    Sign in
+                    Log in
                 </Link>
             </div>
         </div>

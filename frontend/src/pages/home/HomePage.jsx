@@ -4,10 +4,10 @@ import HomeScreen from "./HomeScreen";
 
 export default function HomePage() {
 
-  // const user = false 
+  // const user = true
   const {user} = useAuthStore()
 
-  return (
+  return (   
     <>   
       {user ? <HomeScreen /> : <AuthScreen />}
     </>
