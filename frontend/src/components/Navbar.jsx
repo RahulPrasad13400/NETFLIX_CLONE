@@ -14,7 +14,6 @@ export default function Navbar() {
     }
 
     const { contentType, setContentType } = useContentStore()
-    console.log(contentType)
 
   return (
     <header className='max-w-6xl mx-auto flex flex-wrap items-center justify-between p-4 h-20'> 

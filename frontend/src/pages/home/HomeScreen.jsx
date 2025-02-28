@@ -3,12 +3,14 @@ import Navbar from '../../components/NavBar'
 import { Info, Play } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import useGetTrendingContent from '../../hooks/useGetTrendingContent'
-import { ORIGINAL_IMG_BASE_URL } from '../../utils/constants'
+import { MOVIE_CATEGORIES, ORIGINAL_IMG_BASE_URL, TV_CATEGORIES } from '../../utils/constants'
+import { useContentStore } from '../../store/content'
+import MovieSlider from '../../components/MovieSlider'
   
 export default function HomeScreen() {
   const { trendingContent } = useGetTrendingContent()
   // const { logout } = useAuthStore()
-  
+  const { contentType } = useContentStore()
 
   if(!trendingContent){
     return <div className='h-screen text-white relative'>
@@ -69,9 +71,17 @@ export default function HomeScreen() {
             </Link>
 
           </div>
-      
       </div>
     </div>
+
+    <div className='flex flex-col gap-10 bg-black py-10'>
+          {contentType === "movie" ? (
+            MOVIE_CATEGORIES.map((category)=> <MovieSlider key={category} category={category} />)
+          ) : (
+            TV_CATEGORIES.map((category)=> <MovieSlider key={category} category={category} />)
+          ) }
+    </div>
+
     </>
   )
 }
