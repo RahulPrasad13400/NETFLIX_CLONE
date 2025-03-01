@@ -6,19 +6,19 @@ import useGetTrendingContent from '../../hooks/useGetTrendingContent'
 import { MOVIE_CATEGORIES, ORIGINAL_IMG_BASE_URL, TV_CATEGORIES } from '../../utils/constants'
 import { useContentStore } from '../../store/content'
 import MovieSlider from '../../components/MovieSlider'
+import { useState } from 'react'
   
 export default function HomeScreen() {
   const { trendingContent } = useGetTrendingContent()
   // const { logout } = useAuthStore()
   const { contentType } = useContentStore()
+  const [imgLoading, setImageLoading] = useState(true)
 
   if(!trendingContent){
     return <div className='h-screen text-white relative'>
       <Navbar />
       <div className='absolute top-0 left-0 h-full w-full bg-black/70 
        flex items-center justify-center -z-10 shimmer' />
-
-
     </div>
   }
 
@@ -26,7 +26,13 @@ export default function HomeScreen() {
     <>
     <div className='relative h-screen text-white'>
       <Navbar /> 
-      <img src={ORIGINAL_IMG_BASE_URL+trendingContent?.backdrop_path} alt="Hero Image" 
+
+      {imgLoading && <>
+          <div className='absolute top-0 left-0 h-full w-full bg-black/70 
+            flex items-center justify-center -z-10 shimmer' />
+      </>}
+
+      <img onLoad={()=>setImageLoading(false)} src={ORIGINAL_IMG_BASE_URL+trendingContent?.backdrop_path} alt="Hero Image" 
         className='absolute top-0 left-0 -z-50'
 
       />
